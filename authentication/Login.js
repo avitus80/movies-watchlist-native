@@ -77,7 +77,7 @@ class Login extends Component {
   }
 
   _signup() {
-    console.log("sign up");
+    this.props.navigation.navigate("SignUp");
   }
 
   render() {

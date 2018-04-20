@@ -4,8 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const STYLES = StyleSheet.create({
   button: {
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 15,
     alignItems: 'center',
     backgroundColor: '#000'
   }

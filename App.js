@@ -6,6 +6,9 @@ import Search from './Search';
 import MoviesContainer from './movies/MoviesContainer';
 import Login from './authentication/Login';
 import WatchList from './dashboard/WatchList';
+import Profile from './dashboard/Profile';
+import SignUp from './authentication/SignUp';
+import MenuButton from './header/MenuButton';
 
 const USER_NAV = StackNavigator({
   Login: {
@@ -13,7 +16,13 @@ const USER_NAV = StackNavigator({
   },
   WatchList: {
     screen: WatchList
-  }
+  },
+  Profile: {
+    screen: Profile
+  },
+  SignUp: {
+    screen: SignUp
+  },
 }, {
   headerMode: 'none'
 });
@@ -55,11 +64,30 @@ const ROOT_NAV = StackNavigator({
   Main: {
     screen: MOVIE_NAV
   }
+}, {
+  initialRouteName: 'Main',
+  navigationOptions: ({navigation}) => ({
+    headerStyle: {
+      backgroundColor: '#000',
+      borderColor: '#696969',
+      borderBottomWidth: 1
+    },
+    title: 'Movies Watchlist',
+    headerTitleStyle: {
+      flex: 1, // for textAlign to work properly
+      color: '#fff',
+      fontSize: 25,
+      borderWidth: 1,
+      textAlign: 'center'
+    },
+    headerLeft: <MenuButton nav={navigation}/>,
+    headerRight: <View /> // to center align title
+  })
 });
 
 class App extends Component {
   render() {
-    return <MOVIE_NAV />
+    return <ROOT_NAV />
   }
 }
 

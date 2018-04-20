@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import Style from '../Style.js'
-import Header from '../header/Header';
+import { StyleSheet, View, Text } from 'react-native';
 import MovieListContainer from './MovieListContainer';
+
+const STYLES = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    padding: 15,
+    backgroundColor: '#000'
+  },
+  titleText: {
+    marginBottom: 5,
+    color: '#fff',
+    fontSize: 20,
+  }
+});
 
 class MoviesContainer extends Component {
   static navigationOptions = ({navigation}) => {
@@ -43,21 +54,16 @@ class MoviesContainer extends Component {
     }
 
     return (
-      <View style={Style.subContainer}>
-        <Text style={Style.titleText}>{pageTitle}</Text>
-        {/*use unique key to force component remount*/}
+      <View style={STYLES.mainContainer}>
+        <Text style={STYLES.titleText}>{pageTitle}</Text>
+        {/* use unique key to force component to remount */}
         <MovieListContainer key={state.key} selection={select} />
       </View>
     );
   }
 
   render() {
-    return (
-      <View style={Style.mainContainer}>
-        <Header title="Movies Watchlist" nav={this.props.navigation}/>
-        { this._buildComponent() }
-      </View>
-    );
+    return this._buildComponent();
   }
 }
 
