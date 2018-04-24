@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, Alert, Keyboard } from 'react-native';
-
-const ENV_IP_ADDRESS = "";
-const ENV_POST_URL = "";
+import TMPENV from '../TmpEnv';
 
 const STYLES = StyleSheet.create({
   main: {
@@ -36,7 +34,6 @@ class Login extends Component {
   
   constructor(props) {
     super(props);
-    console.log(props);
     
     this.state = {
       username: "",
@@ -45,7 +42,7 @@ class Login extends Component {
   }
 
   _login() {
-    const URL = "http://" + ENV_IP_ADDRESS + ENV_POST_URL;
+    const URL = "http://" + TMPENV.ENV_IP_ADDRESS + TMPENV.ENV_POST_URL;
 
     let loginData = {
       username: this.state.username,
@@ -91,7 +88,7 @@ class Login extends Component {
           <TextInput style={STYLES.input} secureTextEntry={true} underlineColorAndroid="#fff" onChangeText={(text) => this.setState({password: text})} />
           
           <Button title="Login" onPress={() => this._login()} color="#f00" />
-          <View style={STYLES.button} /> 
+          <View style={STYLES.button} />
           <Button title="Sign Up" onPress={() => this._signup()} color="#f00" />
         </View>
       </View>

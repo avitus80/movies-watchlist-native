@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Hero from './Hero';
+import MoviePosterListContainer from './MoviePosterListContainer';
 
 const STYLES = StyleSheet.create({
   mainContainer: {
     flex: 1
   },
+  listContainer: {
+    height: 250,
+    backgroundColor: '#000',
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10
+  },
   titleText: {
     color: '#fff',
-    fontSize: 25,
-    alignSelf: 'center'
-  }
+    fontSize: 18
+  },
 });
 
 class Home extends Component {
@@ -18,22 +27,31 @@ class Home extends Component {
     drawerLabel: 'HOME'
   }
 
+  _renderList(title, nav, selection) {
+    return (
+      <View style={STYLES.listContainer}>
+        <View style={STYLES.titleContainer}>
+          <Text style={STYLES.titleText}>{title}</Text>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate(nav)}>
+            <View>
+              <Text style={STYLES.titleText}>See all</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <MoviePosterListContainer selection={selection} />
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={STYLES.mainContainer}>
         <ScrollView>
           <Hero />
-          {/* <Text style={STYLES.titleText}>UNDER CONSTRUCTION</Text> */}
-          {/* For testing purpose */}
-          {/* <View style={{height: 500, backgroundColor: '#f00'}}>
-            <Text>HERO</Text>
-          </View>
-          <View style={{height: 500, backgroundColor: '#0f0'}}>
-            <Text>Popular</Text>
-          </View>
-          <View style={{height: 500, backgroundColor: '#00f'}}>
-            <Text>Now Playing</Text>
-          </View> */}
+          { this._renderList("Now Playing", "NowPlaying", "now_playing") }
+          { this._renderList("Upcoming", "Upcoming", "upcoming") }
+          { this._renderList("Popular", "Popular", "popular") }
+          { this._renderList("Top Rated", "TopRated", "top_rated") }
         </ScrollView>
       </View>
     );

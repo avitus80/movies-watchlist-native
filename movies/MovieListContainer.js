@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import LoadingIndicator from '../LoadingIndicator';
-
-const ENV_TMDB_API_KEY = "";
-const ENV_TMDB_URL = "";
-const ENV_TMDB_URL_QUERY_OPTION = "";
-const ENV_TMDB_POSTER_URI = "";
-const ENV_TMDB_POSTER_SIZE = "";
+import TMPENV from '../TmpEnv';
 
 const STYLES = StyleSheet.create({
   container: {
@@ -49,7 +44,7 @@ class MovieListContainer extends Component {
   }
 
   componentDidMount() {
-    let fullURL = ENV_TMDB_URL + this.props.selection + "?api_key=" + ENV_TMDB_API_KEY + ENV_TMDB_URL_QUERY_OPTION;
+    let fullURL = TMPENV.ENV_TMDB_MOVIE_URL + this.props.selection + "?api_key=" + TMPENV.ENV_TMDB_API_KEY + TMPENV.ENV_TMDB_MOVIE_URL_OPTION;
     
     fetch(fullURL)
     .then((response) => response.json())
@@ -65,7 +60,7 @@ class MovieListContainer extends Component {
   }
 
   _renderMovieList(item) {
-    let imageURI = ENV_TMDB_POSTER_URI + ENV_TMDB_POSTER_SIZE + item.poster_path;
+    let imageURI = TMPENV.ENV_TMDB_POSTER_URI + TMPENV.ENV_TMDB_POSTER_SIZE + item.poster_path;
 
     let overview = item.overview;
     if (overview.length > 70) {

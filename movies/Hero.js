@@ -2,19 +2,16 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import LoadingIndicator from '../LoadingIndicator';
-
-const ENV_TMDB_API_KEY = "";
-const ENV_TMDB_URL = "";
-const ENV_TMDB_URL_QUERY_OPTION = "";
-const ENV_TMDB_BACKDROP_URI = "";
-const ENV_TMDB_BACKDROP_SIZE = "";
+import TMPENV from '../TmpEnv';
 
 const STYLES = StyleSheet.create({
   swiper: {
-    height: 250
+    height: 250,
+    backgroundColor: '#000'
   },
   backdrop: {
-    flex: 1
+    flex: 1,
+    opacity: 0.5
   }
 });
 
@@ -29,7 +26,7 @@ class Hero extends Component {
   }
 
   componentDidMount() {
-    let fullURL = ENV_TMDB_URL + "?api_key=" + ENV_TMDB_API_KEY + ENV_TMDB_URL_QUERY_OPTION;
+    let fullURL = TMPENV.ENV_TMDB_DISCOVER_URL + "?api_key=" + TMPENV.ENV_TMDB_API_KEY + TMPENV.ENV_TMDB_DISCOVER_URL_OPTION;
 
     fetch(fullURL)
     .then((response) => response.json())
@@ -44,6 +41,14 @@ class Hero extends Component {
     });
   }
 
+  _renderSwiperItem(item) {
+    let imageURI = TMPENV.ENV_TMDB_BACKDROP_URI + TMPENV.ENV_TMDB_BACKDROP_SIZE + item.backdrop_path;
+
+    return (
+      <Image source={{uri: `${imageURI}`}} style={STYLES.backdrop} key={item.id} />
+    );
+  }
+
   render() {
     if (this.state.isLoading) {
       return <LoadingIndicator />;
@@ -51,13 +56,7 @@ class Hero extends Component {
 
     return (
       <Swiper style={STYLES.swiper} dotColor="#fff" activeDotColor="#f00">
-        {
-          this.state.movieData.map((item) => {
-            let imageURI = ENV_TMDB_BACKDROP_URI + ENV_TMDB_BACKDROP_SIZE + item.backdrop_path;
-
-            return <Image source={{uri: `${imageURI}`}} style={STYLES.backdrop} key={item.id} />;
-          })
-        }
+        { this.state.movieData.map((item) => this._renderSwiperItem(item)) }
       </Swiper>
     );
   }
