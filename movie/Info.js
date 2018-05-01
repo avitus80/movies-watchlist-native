@@ -11,14 +11,14 @@ const STYLES = StyleSheet.create({
   }
 });
 
-class WatchList extends Component {
+class Info extends Component {
   render() {
     return (
       <View style={STYLES.mainContainer}>
-        <Text style={STYLES.text}>WatchList</Text>
+        <Text style={STYLES.text}>Info</Text>
       </View>
     );
   }
 }
 
-export default WatchList;
+export default Info;

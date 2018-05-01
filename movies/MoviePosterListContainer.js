@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import LoadingIndicator from '../LoadingIndicator';
 import TMPENV from '../TmpEnv';
 
 const STYLES = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   poster: {
     width: 135,
     height: 200,
@@ -38,10 +41,20 @@ class MoviePosterListContainer extends Component {
     });
   }
 
+  _showMovieDetails(movie) {
+    this.props.navigation.navigate('Movie', {
+      movieId: movie.id
+    });
+  }
+
   _renderPosterList(item) {
     let imageURI = TMPENV.ENV_TMDB_POSTER_URI + TMPENV.ENV_TMDB_POSTER_SIZE + item.poster_path;
 
-    return <Image source={{uri: `${imageURI}`}} style={STYLES.poster} />;
+    return (
+      <TouchableOpacity style={STYLES.container} activeOpacity={1} onPress={() => this._showMovieDetails(item)}>
+        <Image source={{uri: `${imageURI}`}} style={STYLES.poster} />
+      </TouchableOpacity>
+    );
   }
 
   _getKey(item, index) {

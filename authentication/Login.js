@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, Alert, Keyboard } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, Alert, Keyboard, KeyboardAvoidingView } from 'react-native';
 import TMPENV from '../TmpEnv';
 
 const STYLES = StyleSheet.create({
@@ -42,7 +42,7 @@ class Login extends Component {
   }
 
   _login() {
-    const URL = "http://" + TMPENV.ENV_IP_ADDRESS + TMPENV.ENV_POST_URL;
+    const URL = "http://" + TMPENV.ENV_IP_ADDRESS + TMPENV.ENV_HANDLE_LOGIN_URL;
 
     let loginData = {
       username: this.state.username,
@@ -67,9 +67,10 @@ class Login extends Component {
       // hide keyboard
       Keyboard.dismiss();
 
-      this.props.navigation.navigate("WatchList");
+      // go to user screen
+      this.props.navigation.navigate("User");
     } else {
-      Alert.alert("Login failed", "Invalid username/password.");
+      Alert.alert("Login failed", result.errorMessage);
     }
   }
 
@@ -79,7 +80,7 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={STYLES.main}>
+      <KeyboardAvoidingView style={STYLES.main} behavior="padding">
         <View style={STYLES.sub}>
           <Text style={STYLES.text}>Username</Text>
           <TextInput style={STYLES.input} underlineColorAndroid="#fff" onChangeText={(text) => this.setState({username: text})} />
@@ -91,7 +92,7 @@ class Login extends Component {
           <View style={STYLES.button} />
           <Button title="Sign Up" onPress={() => this._signup()} color="#f00" />
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

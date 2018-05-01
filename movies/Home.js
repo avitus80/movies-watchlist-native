@@ -18,7 +18,12 @@ const STYLES = StyleSheet.create({
   },
   titleText: {
     color: '#fff',
-    fontSize: 18
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 18,
   },
 });
 
@@ -34,11 +39,11 @@ class Home extends Component {
           <Text style={STYLES.titleText}>{title}</Text>
           <TouchableOpacity onPress={() => this.props.navigation.navigate(nav)}>
             <View>
-              <Text style={STYLES.titleText}>See all</Text>
+              <Text style={STYLES.text}>See all</Text>
             </View>
           </TouchableOpacity>
         </View>
-        <MoviePosterListContainer selection={selection} />
+        <MoviePosterListContainer selection={selection} navigation={this.props.navigation}/>
       </View>
     );
   }
@@ -47,7 +52,7 @@ class Home extends Component {
     return (
       <View style={STYLES.mainContainer}>
         <ScrollView>
-          <Hero />
+          <Hero navigation={this.props.navigation}/>
           { this._renderList("Now Playing", "NowPlaying", "now_playing") }
           { this._renderList("Upcoming", "Upcoming", "upcoming") }
           { this._renderList("Popular", "Popular", "popular") }

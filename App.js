@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, TabNavigator } from 'react-navigation';
 import Home from './movies/Home';
 import Search from './Search';
 import MoviesContainer from './movies/MoviesContainer';
@@ -9,16 +9,38 @@ import WatchList from './dashboard/WatchList';
 import Profile from './dashboard/Profile';
 import SignUp from './authentication/SignUp';
 import MenuButton from './header/MenuButton';
+import Movie from './movie/Movie';
 
-const USER_NAV = StackNavigator({
-  Login: {
-    screen: Login
-  },
+// ignore yellow box warnings
+console.ignoredYellowBox = ['Warning: componentWillMount', 'Warning: componentWillReceiveProps', 'Warning: componentWillUpdate'];
+
+const USER_NAV = TabNavigator({
   WatchList: {
     screen: WatchList
   },
   Profile: {
     screen: Profile
+  }
+}, {
+  initialRouteName: 'WatchList',
+  tabBarOptions: {
+    activeTintColor: '#fff',
+    inactiveTintColor:'#fff',
+    indicatorStyle: {
+      backgroundColor: '#f00'
+    },
+    style: {
+      backgroundColor: '#000'
+    }
+  }
+});
+
+const AUTH_NAV = StackNavigator({
+  Login: {
+    screen: Login
+  },
+  User: {
+    screen: USER_NAV
   },
   SignUp: {
     screen: SignUp
@@ -46,8 +68,11 @@ const MOVIE_NAV = DrawerNavigator ({
   TopRated: {
     screen: MoviesContainer
   },
+  Movie: {
+    screen: Movie
+  },
   Login: {
-    screen: USER_NAV
+    screen: AUTH_NAV
   }
 }, {
   initialRouteName: 'Home',
@@ -56,7 +81,7 @@ const MOVIE_NAV = DrawerNavigator ({
   contentOptions: {
     activeTintColor: '#fff',
     activeBackgroundColor: '#f00',
-    inactiveTintColor:'#fff'
+    inactiveTintColor:'#fff',
   }
 });
 

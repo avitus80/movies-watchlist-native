@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import LoadingIndicator from '../LoadingIndicator';
 import TMPENV from '../TmpEnv';
@@ -59,6 +59,12 @@ class MovieListContainer extends Component {
     });
   }
 
+  _showMovieDetails(movie) {
+    this.props.navigation.navigate('Movie', {
+      movieId: movie.id
+    });
+  }
+
   _renderMovieList(item) {
     let imageURI = TMPENV.ENV_TMDB_POSTER_URI + TMPENV.ENV_TMDB_POSTER_SIZE + item.poster_path;
 
@@ -69,7 +75,7 @@ class MovieListContainer extends Component {
     }
 
     return (
-      <View style={STYLES.container}>
+      <TouchableOpacity style={STYLES.container} activeOpacity={1} onPress={() => this._showMovieDetails(item)}>
         <Image source={{uri: `${imageURI}`}} style={STYLES.poster} />
         <View style={STYLES.infoContainer}>
           <Text style={STYLES.movieTitle}>{item.title}</Text>
@@ -77,7 +83,7 @@ class MovieListContainer extends Component {
           <Text style={STYLES.movieText}>Rating:  <Ionicons name='ios-star' size={15} color='#ffa500' />  {item.vote_average}</Text>
           <Text style={STYLES.movieText}>{overview}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 

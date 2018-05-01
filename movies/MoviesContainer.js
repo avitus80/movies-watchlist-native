@@ -57,7 +57,7 @@ class MoviesContainer extends Component {
       <View style={STYLES.mainContainer}>
         <Text style={STYLES.titleText}>{pageTitle}</Text>
         {/* use unique key to force component to remount */}
-        <MovieListContainer key={state.key} selection={select} />
+        <MovieListContainer key={state.key} selection={select} navigation={this.props.navigation}/>
       </View>
     );
   }

@@ -1,14 +1,30 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+import Info from './Info';
+import Cast from './Cast';
+import Trailers from './Trailers';
 
-class MovieNav extends Component {
-  render() {
-    return (
-      <View>
-        <Text>MovieNav</Text>
-      </View>
-    );
+const MOVIE_NAV = TabNavigator({
+  Info: {
+    screen: Info
+  },
+  Cast: {
+    screen: Cast
+  },
+  Trailers: {
+    screen: Trailers
   }
-}
+}, {
+  initialRouteName: 'Info',
+  tabBarOptions: {
+    activeTintColor: '#fff',
+    inactiveTintColor:'#fff',
+    indicatorStyle: {
+      backgroundColor: '#f00'
+    },
+    style: {
+      backgroundColor: '#000'
+    }
+  }
+});
 
-export default MovieNav;
+export default MOVIE_NAV;
