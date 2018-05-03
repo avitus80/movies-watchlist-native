@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image, Linking } from 'react-native';
 import LoadingIndicator from '../LoadingIndicator';
-import TMPENV from '../TmpEnv';
+import Config from 'react-native-config';
 
 const STYLES = StyleSheet.create({
   mainContainer: {
@@ -41,7 +41,7 @@ class Trailers extends Component {
 
   componentDidMount() {
     this.props.screenProps.trailers.map((item) => {
-      let fullURL = TMPENV.ENV_YT_VIDEO_URL + "?id=" + item.key + "&key=" + TMPENV.ENV_YT_API_KEY + TMPENV.ENV_YT_VIDEO_URL_OPTION;
+      let fullURL = Config.ENV_YT_VIDEO_URL + "?id=" + item.key + "&key=" + Config.ENV_YT_API_KEY + Config.ENV_YT_VIDEO_URL_OPTION;
 
       fetch(fullURL)
       .then((response) => response.json())
@@ -65,7 +65,7 @@ class Trailers extends Component {
   }
 
   _openYoutube(id) {
-    let url = TMPENV.ENV_YT_URL + "?v=" + id;
+    let url = Config.ENV_YT_URL + "?v=" + id;
     
     Linking.canOpenURL(url)
     .then((supported) => {

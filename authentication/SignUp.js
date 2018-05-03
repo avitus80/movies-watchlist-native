@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, Alert, Keyboard, KeyboardAvoidingView } from 'react-native';
-import TMPENV from '../TmpEnv';
+import Config from 'react-native-config';
 
 const STYLES = StyleSheet.create({
   main: {
@@ -38,7 +38,7 @@ class SignUp extends Component {
   }
 
   _signup() {
-    const URL = "http://" + TMPENV.ENV_IP_ADDRESS + TMPENV.ENV_HANDLE_SIGNUP_URL;
+    const URL = "http://" + Config.ENV_IP_ADDRESS + Config.ENV_HANDLE_SIGNUP_URL;
 
     let signupData = {
       username: this.state.username,

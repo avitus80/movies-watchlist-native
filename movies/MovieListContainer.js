@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoadingIndicator from '../LoadingIndicator';
-import TMPENV from '../TmpEnv';
+import Config from 'react-native-config';
 
 const STYLES = StyleSheet.create({
   container: {
@@ -44,7 +44,7 @@ class MovieListContainer extends Component {
   }
 
   componentDidMount() {
-    let fullURL = TMPENV.ENV_TMDB_MOVIE_URL + this.props.selection + "?api_key=" + TMPENV.ENV_TMDB_API_KEY + TMPENV.ENV_TMDB_MOVIE_URL_OPTION;
+    let fullURL = Config.ENV_TMDB_MOVIE_URL + this.props.selection + "?api_key=" + Config.ENV_TMDB_API_KEY + Config.ENV_TMDB_MOVIE_URL_OPTION;
     
     fetch(fullURL)
     .then((response) => response.json())
@@ -66,7 +66,7 @@ class MovieListContainer extends Component {
   }
 
   _renderMovieList(item) {
-    let imageURI = TMPENV.ENV_TMDB_POSTER_URI + TMPENV.ENV_TMDB_POSTER_SIZE + item.poster_path;
+    let imageURI = Config.ENV_TMDB_POSTER_URI + Config.ENV_TMDB_POSTER_SIZE + item.poster_path;
 
     let overview = item.overview;
     if (overview.length > 70) {

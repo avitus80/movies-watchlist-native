@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import MovieNav from './MovieNav';
 import LoadingIndicator from '../LoadingIndicator';
-import TMPENV from '../TmpEnv';
+import Config from 'react-native-config';
 
 const STYLES = StyleSheet.create({
   mainContainer: {
@@ -35,7 +35,7 @@ class Movie extends Component {
   componentDidMount() {
     const movieId = this.props.navigation.state.params.movieId;
 
-    let fullURL = TMPENV.ENV_TMDB_MOVIE_URL + movieId + "?api_key=" + TMPENV.ENV_TMDB_API_KEY + TMPENV.ENV_TMDB_MOVIE_URL_APPEND;
+    let fullURL = Config.ENV_TMDB_MOVIE_URL + movieId + "?api_key=" + Config.ENV_TMDB_API_KEY + Config.ENV_TMDB_MOVIE_URL_APPEND;
 
     fetch(fullURL)
     .then((response) => response.json())
@@ -57,7 +57,7 @@ class Movie extends Component {
       return <LoadingIndicator />;
     }
 
-    let imageURI = TMPENV.ENV_TMDB_BACKDROP_URI + TMPENV.ENV_TMDB_BACKDROP_SIZE + this.state.movie.backdrop_path;
+    let imageURI = Config.ENV_TMDB_BACKDROP_URI + Config.ENV_TMDB_BACKDROP_SIZE + this.state.movie.backdrop_path;
 
     return (
       <View style={STYLES.mainContainer}>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import LoadingIndicator from '../LoadingIndicator';
-import TMPENV from '../TmpEnv';
+import Config from 'react-native-config';
 
 const STYLES = StyleSheet.create({
   container: {
@@ -26,7 +26,7 @@ class MoviePosterListContainer extends Component {
   }
 
   componentDidMount() {
-    let fullURL = TMPENV.ENV_TMDB_MOVIE_URL + this.props.selection + "?api_key=" + TMPENV.ENV_TMDB_API_KEY + TMPENV.ENV_TMDB_MOVIE_URL_OPTION;
+    let fullURL = Config.ENV_TMDB_MOVIE_URL + this.props.selection + "?api_key=" + Config.ENV_TMDB_API_KEY + Config.ENV_TMDB_MOVIE_URL_OPTION;
     
     fetch(fullURL)
     .then((response) => response.json())
@@ -48,7 +48,7 @@ class MoviePosterListContainer extends Component {
   }
 
   _renderPosterList(item) {
-    let imageURI = TMPENV.ENV_TMDB_POSTER_URI + TMPENV.ENV_TMDB_POSTER_SIZE + item.poster_path;
+    let imageURI = Config.ENV_TMDB_POSTER_URI + Config.ENV_TMDB_POSTER_SIZE + item.poster_path;
 
     return (
       <TouchableOpacity style={STYLES.container} activeOpacity={1} onPress={() => this._showMovieDetails(item)}>

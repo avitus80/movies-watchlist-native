@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, Button } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
 import LoadingIndicator from '../LoadingIndicator';
-import TMPENV from '../TmpEnv';
+import Config from 'react-native-config';
 
 const STYLES = StyleSheet.create({
   swiper: {
@@ -70,7 +70,7 @@ class Hero extends Component {
   }
 
   componentDidMount() {
-    let fullURL = TMPENV.ENV_TMDB_DISCOVER_URL + "?api_key=" + TMPENV.ENV_TMDB_API_KEY + TMPENV.ENV_TMDB_DISCOVER_URL_OPTION;
+    let fullURL = Config.ENV_TMDB_DISCOVER_URL + "?api_key=" + Config.ENV_TMDB_API_KEY + Config.ENV_TMDB_DISCOVER_URL_OPTION;
 
     fetch(fullURL)
     .then((response) => response.json())
@@ -92,8 +92,8 @@ class Hero extends Component {
   }
 
   _renderSwiperItem(item) {
-    let backdropURI = TMPENV.ENV_TMDB_BACKDROP_URI + TMPENV.ENV_TMDB_BACKDROP_SIZE + item.backdrop_path;
-    let posterURI = TMPENV.ENV_TMDB_POSTER_URI + TMPENV.ENV_TMDB_POSTER_SIZE + item.poster_path;
+    let backdropURI = Config.ENV_TMDB_BACKDROP_URI + Config.ENV_TMDB_BACKDROP_SIZE + item.backdrop_path;
+    let posterURI = Config.ENV_TMDB_POSTER_URI + Config.ENV_TMDB_POSTER_SIZE + item.poster_path;
     
     let overview = item.overview;
     if (overview.length > 85) {

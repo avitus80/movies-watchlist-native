@@ -12,7 +12,7 @@ import MenuButton from './header/MenuButton';
 import Movie from './movie/Movie';
 
 // ignore yellow box warnings
-console.ignoredYellowBox = ['Warning: componentWillMount', 'Warning: componentWillReceiveProps', 'Warning: componentWillUpdate'];
+console.ignoredYellowBox = ['Warning: componentWillMount', 'Warning: componentWillReceiveProps', 'Warning: componentWillUpdate', 'Warning: isMounted'];
 
 const USER_NAV = TabNavigator({
   WatchList: {
