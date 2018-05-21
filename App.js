@@ -53,9 +53,9 @@ const MOVIE_NAV = DrawerNavigator ({
   Home: {
     screen: Home
   },
-  Search: {
+  /* Search: {
     screen: Search
-  },
+  }, */
   NowPlaying: {
     screen: MoviesContainer
   },

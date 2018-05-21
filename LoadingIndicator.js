@@ -13,7 +13,7 @@ class LoadingIndicator extends Component {
   render() {
     return (
       <View style={STYLES.container}>
-        <ActivityIndicator size={80} color="#f00" />
+        <ActivityIndicator size={ this.props.size ? this.props.size : 80 } color="#f00" />
       </View>
     );
   }

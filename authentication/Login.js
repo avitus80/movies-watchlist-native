@@ -17,10 +17,10 @@ const STYLES = StyleSheet.create({
     marginBottom: 5,
   },
   input: {
+    height: 30,
     backgroundColor: '#fff',
     marginBottom: 10,
-    paddingLeft: 5,
-    paddingRight: 5,
+    padding: 5,
   },
   button: {
     marginTop: 10,
@@ -42,7 +42,11 @@ class Login extends Component {
   }
 
   _login() {
-    const URL = "http://" + Config.ENV_IP_ADDRESS + Config.ENV_HANDLE_LOGIN_URL;
+    this.setState({
+      isLoggingIn: true,
+    });
+    
+    const URL = Config.ENV_IP_ADDRESS + Config.ENV_HANDLE_LOGIN_URL;
 
     let loginData = {
       username: this.state.username,
@@ -53,13 +57,19 @@ class Login extends Component {
       method: 'POST',
       body: JSON.stringify(loginData),
       headers: new Headers({
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       }),
     })
     //.then(res => res.text()) // returned content-type is text/plain
     .then(response => response.json()) // returned content-type is application/json
     .then(result => this._processLogin(result))
-    .catch(error => Alert.alert("Error", error.message));
+    .catch(error => {
+      this.setState({
+        isLoggingIn: false,
+      });
+      Alert.alert("Error", error.message);
+    });
   }
 
   _processLogin(result) {
@@ -70,6 +80,9 @@ class Login extends Component {
       // go to user screen
       this.props.navigation.navigate("User");
     } else {
+      this.setState({
+        isLoggingIn: false,
+      });
       Alert.alert("Login failed", result.errorMessage);
     }
   }
@@ -80,7 +93,7 @@ class Login extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={STYLES.main} behavior="padding">
+      <KeyboardAvoidingView style={STYLES.main} enabled>
         <View style={STYLES.sub}>
           <Text style={STYLES.text}>Username</Text>
           <TextInput style={STYLES.input} underlineColorAndroid="#fff" onChangeText={(text) => this.setState({username: text})} />
@@ -88,9 +101,10 @@ class Login extends Component {
           <Text style={STYLES.text}>Password</Text>
           <TextInput style={STYLES.input} secureTextEntry={true} underlineColorAndroid="#fff" onChangeText={(text) => this.setState({password: text})} />
           
-          <Button title="Login" onPress={() => this._login()} color="#f00" />
+          <Button title="Login" onPress={() => this._login()} color="#f00" disabled={this.state.isLoggingIn}/>
           <View style={STYLES.button} />
           <Button title="Sign Up" onPress={() => this._signup()} color="#f00" />
+          
         </View>
       </KeyboardAvoidingView>
     );

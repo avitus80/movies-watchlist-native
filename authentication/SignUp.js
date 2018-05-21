@@ -17,10 +17,10 @@ const STYLES = StyleSheet.create({
     marginBottom: 5,
   },
   input: {
+    height: 30,
     backgroundColor: '#fff',
     marginBottom: 10,
-    paddingLeft: 5,
-    paddingRight: 5,
+    padding: 5,
   },
 });
 
@@ -38,7 +38,11 @@ class SignUp extends Component {
   }
 
   _signup() {
-    const URL = "http://" + Config.ENV_IP_ADDRESS + Config.ENV_HANDLE_SIGNUP_URL;
+    this.setState({
+      isRegistering: true,
+    });
+
+    const URL = Config.ENV_IP_ADDRESS + Config.ENV_HANDLE_SIGNUP_URL;
 
     let signupData = {
       username: this.state.username,
@@ -57,7 +61,12 @@ class SignUp extends Component {
     })
     .then(response => response.json()) // returned content-type is application/json
     .then(result => this._processSignup(result))
-    .catch(error => Alert.alert("Error", error.message));
+    .catch(error => {
+      this.setState({
+        isRegistering: false,
+      });
+      Alert.alert("Error", error.message)
+    });
   }
 
   _processSignup(result) {
@@ -70,13 +79,16 @@ class SignUp extends Component {
       // go to login screen
       this.props.navigation.navigate("Login");
     } else {
+      this.setState({
+        isRegistering: false,
+      });
       Alert.alert("Sign up failed", result.errorMessage);
     }
   }
 
   render() {
     return (
-      <KeyboardAvoidingView style={STYLES.main} behavior="padding">
+      <KeyboardAvoidingView style={STYLES.main} enabled>
         <View style={STYLES.sub}>
           <Text style={STYLES.text}>Username</Text>
           <TextInput style={STYLES.input} underlineColorAndroid="#fff" onChangeText={(text) => this.setState({username: text})} />
@@ -93,7 +105,7 @@ class SignUp extends Component {
           <Text style={STYLES.text}>Email</Text>
           <TextInput style={STYLES.input} underlineColorAndroid="#fff" onChangeText={(text) => this.setState({email: text})} />
 
-          <Button title="Sign Up" onPress={() => this._signup()} color="#f00" />
+          <Button title="Sign Up" onPress={() => this._signup()} color="#f00" disabled={this.state.isRegistering}/>
         </View>
       </KeyboardAvoidingView>
     );
