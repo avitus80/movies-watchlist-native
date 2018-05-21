@@ -19,10 +19,10 @@ The following items will be available in the next update:
 
 * React (version 16.3.1)
 * React Native (version 0.55.3)
-* React Navigation (version 1.5.11)
-* React Native Config (version 0.11.5)
-* React Native Vector Icons (version 4.6.0)
-* React Native Swiper (version 1.5.13)
+* [React Navigation](https://v1.reactnavigation.org/) (version 1.5.11)
+* [React Native Config](https://github.com/luggit/react-native-config/) (version 0.11.5)
+* [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons/) (version 4.6.0)
+* [React Native Swiper](https://github.com/leecade/react-native-swiper/) (version 1.5.13)
 
 ## Testing
 
