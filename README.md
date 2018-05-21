@@ -23,3 +23,7 @@ The following items will be available in the next update:
 * React Native Config (version 0.11.5)
 * React Native Vector Icons (version 4.6.0)
 * React Native Swiper (version 1.5.13)
+
+## Testing
+
+This app has only been tested on *Android* devices. It may not work properly on *iOS* devices.
