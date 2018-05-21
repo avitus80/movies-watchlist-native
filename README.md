@@ -15,6 +15,9 @@ The following items will be available in the next update:
 * User details screen (Watchlist and Profile)
 * Bookmark (add to favourite) function
 
+## Screenshots
+![](https://raw.githubusercontent.com/avitus80/movies-watchlist-native/master/screenshots/Screenshot_20180521-120650.png) ![](https://raw.githubusercontent.com/avitus80/movies-watchlist-native/master/screenshots/Screenshot_20180521-120701.png) ![](https://raw.githubusercontent.com/avitus80/movies-watchlist-native/master/screenshots/Screenshot_20180521-120713.png)
+
 ## Built with
 
 * React (version 16.3.1)
